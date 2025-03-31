@@ -1,0 +1,625 @@
+<html lang="en"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Build a Solar Car</title>
+    <style>
+/* General styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: black; /* Black background */
+            color: white; /* White text for visibility */
+            height: 100vh;
+            padding-top: 50px; /* Space for sticky header */
+        }
+
+        header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            position: fixed; /* Fix the header to the top */
+            top: 0;
+            width: 100%;
+            z-index: 1000; /* Ensure it stays on top */
+        }
+
+        nav ul {
+            position: relative; /* Changed from sticky to relative to avoid issues */
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center; /* Center the navigation links */
+        }
+
+        nav ul li {
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        #home {
+            margin-top: 80px; /* Adjusted to account for the sticky header */
+            height: 90vh; /* Full height of the screen */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #333; /* Dark background */
+            position: relative;
+            max-width: 1200px; /* Constrained width */
+            margin: 0 auto; /* Center block horizontally */
+        }
+
+/* Rest of your sections */
+
+         #home .text-container {
+             position: absolute;
+             z-index: 2;
+             text-align: center;
+             color: rgb(0, 0, 0);
+             padding: 20px;
+             max-width: 600px;
+         }
+ 
+         #home h2 {
+             font-size: 3em;
+             margin-bottom: 20px;
+         }
+ 
+         #home p {
+             font-size: 1.5em;
+             margin-bottom: 30px;
+         }
+ 
+         #home .image-container2 {
+             width: 100%;
+             height: 100%;
+             position: absolute;
+             top: 0;
+             left: 0;
+             z-index: 1;
+         }
+ 
+         #home .image-container2 img {
+             width: 100%;
+             height: 100%;
+             object-fit: cover;
+             border: 5px solid #4CAF50;
+             border-radius: 8px;
+         }
+ 
+         #leftContainerClicky {
+            width: 40%;
+            padding: 20px;
+            background-color: #f5f5f500;
+            height: 80%;
+            
+        }
+ 
+        #rightContainerClicky {
+            width: 40%;
+            height: 80%;
+           background-color: #e4e4e400;
+            position: relative;
+            overflow: hidden;
+        }
+        
+ 
+        .shape {
+            position: absolute;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+        }
+ 
+        .show {
+            opacity: 1;
+        }
+ 
+        .car {
+             position: absolute;
+             width: 120px;
+             top: 50px;
+             left: 50px;
+             z-index: 1000; /* Ensure it's on top */
+             transition: transform 2s ease-in-out;
+             
+         }
+ 
+        #generateButton {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+ 
+         /* Styling for each section */
+         section {
+             padding: 40px;
+             margin: 20px;
+             background-color: #333; /* Dark background for sections */
+             border-radius: 8px; /* Slightly rounded corners */
+             display: flex;
+             justify-content: space-between;
+             align-items: center;
+             height: 50vh; /* Each section takes up 50% of the viewport height */
+             max-width: 1200px; /* Constrained width */
+             margin: 0 auto; /* Center block horizontally */
+         }
+
+        #build-guide {
+                padding: 40px;
+                margin: 20px;
+                background-color: #333;
+                border-radius: 8px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                height: 350vh; /* Increased height */
+                max-width: 1200px;
+                margin: 0 auto;
+            }
+
+
+         
+         /* Text container (left) */
+         .text-container {
+             flex: 1;
+             margin-right: 20px;
+         }
+ 
+         /* Image container (right) */
+         .image-container {
+            display: block; /* Ensures each image container is treated as a block element */
+            text-align: center; /* Centers the images */
+            margin-bottom: 10px; /* Adds spacing between images */
+        }
+                .image-wrapper {
+            display: flex;
+            flex-direction: column; /* Stacks items vertically */
+            align-items: center; /* Centers images horizontally */
+        }
+
+
+ 
+         .text-container h2 {
+             text-align: left;
+             margin-bottom: 20px;
+         }
+ 
+         .text-container p, .text-container ul, .text-container ol {
+             text-align: left;
+         }
+ 
+         .image-container img {
+             max-width: 100%;
+             height: auto;
+             border: 5px solid #4CAF50;
+             border-radius: 8px;
+         }
+ 
+         footer {
+             text-align: center;
+             padding: 10px;
+             background-color: #f1f1f1;
+             color: black;
+         }
+ 
+  /* Styling for each section */
+  
+         .accordion-item {
+             border-bottom: 1px solid #e5e5e5;
+         }
+ 
+         button[aria-expanded='true'] {
+             border-bottom: 1px solid #457850;
+         }
+ 
+         button {
+             position: relative;
+             display: block;
+             text-align: left;
+             width: 100%;
+             padding: 1em 0;
+             color: #72a284;
+             font-size: 1.15rem;
+             font-weight: 400;
+             border: none;
+             background: none;
+             outline: none;
+             cursor: pointer;
+         }
+ 
+         button:hover, button:focus {
+             color: #03d229;
+         }
+ 
+         .icon {
+             display: inline-block;
+             position: absolute;
+             top: 18px;
+             right: 0;
+             width: 22px;
+             height: 22px;
+             border: 1px solid;
+             border-radius: 22px;
+         }
+ 
+         .icon::before, .icon::after {
+             display: block;
+             position: absolute;
+             content: '';
+             background: currentColor;
+         }
+ 
+         .icon::before {
+             top: 9px;
+             left: 5px;
+             width: 10px;
+             height: 2px;
+         }
+ 
+         .icon::after {
+             top: 5px;
+             left: 9px;
+             width: 2px;
+             height: 10px;
+         }
+ 
+         button[aria-expanded='true'] .icon::after {
+             width: 0;
+         }
+ 
+         .accordion-content {
+             opacity: 0;
+             max-height: 0;
+             overflow: hidden;
+             transition: opacity 200ms linear, max-height 200ms linear;
+         }
+ 
+         button[aria-expanded='true'] + .accordion-content {
+             opacity: 1;
+             max-height: 9em;
+         }
+ 
+ 
+    </style>
+ </head>
+ <body>
+ 
+     <img class="car" src="https://lh3.googleusercontent.com/pw/AP1GczPQ-9sFk4emlJwSuyOz3xIOCH7fdrSwpHq4zSJPnMNet6BWgNYFYX0gOKaFD7aS3On7hVPtTjeURBSvL0DDucyiycJBozbHq3SsKZQySgen6XCoT_M=w600-h315-p-k" style="overflow: visible; transform: translate(800.932px, 1776.5px);">
+    <header>
+        <h1>How to Build a Solar Car</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#materials">Materials List</a></li>
+                <li><a href="#build-guide">Build Guide</a></li>
+                <li><a href="#faqs">FAQs</a></li>
+                <li><a href="#troubleshooting">Troubleshooting</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+   
+    <section id="home">
+        <div class="text-container">
+            <h2>Learn all about Solar!</h2>
+            <h3>Solar cars use energy from the sun to power an electric motor, making them an eco-friendly alternative to traditional gasoline vehicles. They rely on photovoltaic cells to convert sunlight into electricity, which is then stored in a battery or used immediately to drive the car. While current solar car technology is still developing, advancements in efficiency and battery storage are bringing us closer to a future where solar-powered transportation is a viable everyday option. These vehicles are often lightweight and aerodynamically designed to maximize energy efficiency, making them a fascinating innovation in the world of renewable energy.</h3>
+        </div>
+        <div class="image-container2">
+            <a href="https://lh3.googleusercontent.com/pw/AP1GczO79EXuOW-Gwzj9bQ88v3Tr4g5BjVdF-OepxSr0zwme_JVmY1h9zxjWGqmufN5cTgdbSL-eLPIhF4SmzEbxNkB9K6flGF80JgByFjfjNzmpVVtFQAo=w2400?source=screenshot.guru"> 
+                <img src="https://lh3.googleusercontent.com/pw/AP1GczO79EXuOW-Gwzj9bQ88v3Tr4g5BjVdF-OepxSr0zwme_JVmY1h9zxjWGqmufN5cTgdbSL-eLPIhF4SmzEbxNkB9K6flGF80JgByFjfjNzmpVVtFQAo=w600-h315-p-k">
+            </a>
+        </div>
+    </section>
+    
+    <div style="display:none;">This is invisible content.</div>
+ 
+    <section id="materialsClicky">
+     <div id="leftContainerClicky">
+         <h2>Materials List</h2>
+            <ul>
+                <li>Solar Panels</li>
+                <li>Battery Pack</li>
+                <li>Electric Motor</li>
+                <li>Frame Materials (Aluminum, Steel, or Composite)</li>
+                <li>Wiring and Connectors</li>
+            </ul>
+         <button id="generateButton">Add Materials</button>
+     </div>
+ 
+     <div id="rightContainerClicky"></div>
+ </section>
+ 
+    
+   
+    <section id="build-guide" height: 100vh;>
+        <div class="text-container">
+            <h2>Step-by-Step Build Guide</h2>
+                   
+<h3>1. Conceptualize the Design</h3>   <ul>
+<h6>Research: Start by researching solar-powered vehicles, their designs, and the type of solar cells used. Study the principles of solar energy and how it can be converted to power an electric motor.</h6>
+<h6>Determine the Scale: Decide if you want to build a small-scale prototype for experimentation or a full-size functional solar car.</h6>
+<h6>Create a Sketch: Design a simple layout for the car, considering factors like weight, aerodynamics, and efficiency.</h6>
+</ul>
+<h3>2. Gather Materials and Tools</h3><ul>
+<h6>Solar Panels: High-efficiency solar cells are essential. Monocrystalline or polycrystalline panels are commonly used.</h6>
+<h6>Electric Motor: A DC motor to convert electrical energy into mechanical energy.</h6>
+<h6>Chassis: A lightweight frame made from materials such as plastic, aluminum, or carbon fiber. The chassis must be sturdy yet light for optimal performance.</h6>
+<h6>Batteries: Rechargeable batteries (Li-ion or lead-acid) to store the energy generated by the solar panels. You need enough battery capacity to store energy for driving when there’s no sunlight.</h6>
+<h6>Wires, Connectors, and Voltage Regulator: Proper wiring and connectors to connect the solar panels to the motor and battery. A voltage regulator ensures the correct voltage is supplied to each component.</h6>
+<h6>Wheels and Suspension: Light wheels and a basic suspension system.</h6>
+<h6>Motor Controller: This will control the speed of the motor depending on the power from the solar panels.</h6>
+</ul>
+<h3>3. Build the Chassis</h3><ul>
+<h6>Cut and Shape the Frame: Using your design sketch, cut the materials to create the frame. Keep the structure lightweight but strong enough to support all components.</h6>
+<h6>Install the Suspension and Wheels: Attach the wheels and suspension to the chassis to allow smooth movement.</h6>
+<h6>Mount the Motor: Fix the electric motor to the chassis in a way that it drives the wheels effectively (usually connected through gears or belts).</h6>
+</ul>
+<h3>4. Install the Solar Panels</h3><ul>
+<h6>Positioning: Attach the solar panels to the top of the car or other areas where they can receive maximum sunlight. The panels should be angled correctly to capture sunlight most effectively.</h6>
+<h6>Wiring: Connect the solar panels to the battery using wires and connectors. Ensure that the wires are insulated and securely attached.</h6>
+<h6>Testing Solar Output: Measure the output of the solar panels using a multimeter to ensure they are generating enough power.</h6>
+</ul>
+<h3>5. Install the Battery System</h3><ul>
+<h6>Battery Placement: Place the battery in the car, ensuring it is safely secured and does not add unnecessary weight to specific areas.</h6>
+<h6>Connect Battery to Motor: Use a motor controller to connect the battery to the electric motor. The controller will regulate the amount of current flowing to the motor.</h6>
+<h6>Charge Control: Use a charge controller between the solar panels and the battery to prevent overcharging and ensure optimal charging.</h6>
+</ul>
+<h3>6. Set Up the Motor and Controller</h3><ul>
+<h6>Motor Placement: Attach the electric motor to the wheels, typically via gears or a belt. Ensure it’s aligned and can transfer power efficiently.</h6>
+<h6>Motor Controller Wiring: Wire the motor controller between the motor and the battery, ensuring the right wiring for forward and reverse movement.</h6>
+<h6>Speed Control: Ensure that the motor controller is capable of adjusting the speed based on the solar energy available.</h6>
+</ul>
+<h3>7. Connect and Test the Electrical System</h3><ul>
+<h6>Complete Wiring: Connect all electrical components (solar panels, battery, motor, and controller) properly, ensuring they are in line with the voltage and current requirements.</h6>
+<h6>Testing: Power up the system, check for power loss, and ensure that the solar panels are charging the battery. Test if the car moves smoothly and if the motor responds to the controller.</h6>
+</ul>
+<h3>8. Testing and Fine-Tuning</h3><ul>
+<h6>Test Under Sunlight: Place the car in direct sunlight and observe how well the solar panels charge the battery. Monitor the motor's performance and how long it runs on a full charge.</h6>
+<h6>Test the Efficiency: Test the car on different terrains to ensure the motor and solar panels are efficient enough to power the car for a reasonable distance.</h6>
+<h6>Fine-Tune: Adjust components, such as motor speed, weight distribution, or solar panel orientation, to optimize performance.</h6>
+</ul>
+<h3>9. Safety Considerations</h3><ul>
+<h6>Protect Electrical Components: Ensure that all electrical connections are properly insulated and that the system is protected from short circuits.</h6>
+<h6>Waterproofing: If the solar car will be exposed to rain, ensure the electrical components are waterproof.</h6>
+<h6>Weight Management: Ensure that the weight is evenly distributed, as too much weight on one side can cause uneven power distribution and lower efficiency.</h6>
+</ul>
+<h3>10. Refine the Design for Practical Use (Optional)</h3><ul>
+<h6>Aerodynamics: Make adjustments to the design for better aerodynamics to reduce drag and improve energy efficiency.</h6>
+<h6>Upgrade Solar Panels: Consider using more efficient solar panels if needed for better performance.</h6>
+<h6>Expand Battery Capacity: If you want the car to run for longer distances, consider increasing the battery capacity or adding additional batteries.</h6>
+</ul>
+
+
+        </div>
+        <div class="image-wrapper">
+            <h3>1-2</h3>
+            <div class="image-container"> 
+                <a href="https://lh3.googleusercontent.com/pw/AP1GczO79EXuOW-Gwzj9bQ88v3Tr4g5BjVdF-OepxSr0zwme_JVmY1h9zxjWGqmufN5cTgdbSL-eLPIhF4SmzEbxNkB9K6flGF80JgByFjfjNzmpVVtFQAo=w2400?source=screenshot.guru"> 
+                    <img src="https://lh3.googleusercontent.com/pw/AP1GczO79EXuOW-Gwzj9bQ88v3Tr4g5BjVdF-OepxSr0zwme_JVmY1h9zxjWGqmufN5cTgdbSL-eLPIhF4SmzEbxNkB9K6flGF80JgByFjfjNzmpVVtFQAo=w600-h315-p-k" alt="Detailed diagram explaining engineering process.">
+                </a>            <h3>3-4</h3>
+            <div class="image-container"> 
+                <a href="https://lh3.googleusercontent.com/pw/AP1GczPxM31GxAO2BceSrcbn7MbbBXyCxbPJb4B2WKzi5TNjMmq6eP6Vg7qhybasE7B8Ssn6UfdIlp9ZQFJVeT_wZXZU8JX3U_WaDfCorU6gbVQAmuF11OQ=w2400?source=screenshot.guru"> 
+                    <img src="https://lh3.googleusercontent.com/pw/AP1GczPxM31GxAO2BceSrcbn7MbbBXyCxbPJb4B2WKzi5TNjMmq6eP6Vg7qhybasE7B8Ssn6UfdIlp9ZQFJVeT_wZXZU8JX3U_WaDfCorU6gbVQAmuF11OQ=w600-h315-p-k" alt="Close-up of the chassis, as well as solar panels being installed on a car.">
+                </a>            <h3>5-6</h3>
+            <div class="image-container"> 
+                <a href="https://lh3.googleusercontent.com/pw/AP1GczN_t9UZt5QzajRJ3uNH4NGXSQ4m-1Jb67PoR_D3_R7FeVIaSnohA9vS-vzN8cQpZq7SZHZ4dFz0Ee_DK1sXyJ0iX4mrZUL5yyfS_LZ9kFZIJeguuec=w2400?source=screenshot.guru"> 
+                    <img src="https://lh3.googleusercontent.com/pw/AP1GczN_t9UZt5QzajRJ3uNH4NGXSQ4m-1Jb67PoR_D3_R7FeVIaSnohA9vS-vzN8cQpZq7SZHZ4dFz0Ee_DK1sXyJ0iX4mrZUL5yyfS_LZ9kFZIJeguuec=w600-h315-p-k" alt="Wiring and battery connections inside a solar car.">
+                </a>            <h3>7-8</h3>
+            <div class="image-container"> 
+                <a href="https://lh3.googleusercontent.com/pw/AP1GczPO1zRxYpBut8zbZfQxQZdHTkseuuq1Etkv4rzz_PbeZxYFGhzhALtjJsYC2B9z8MUyo8XHPq5c0XBbr-SkKc5-sTlj5hdJ_kHHdNmBBpJZZE3CWlU=w2400?source=screenshot.guru"> 
+                    <img src="https://lh3.googleusercontent.com/pw/AP1GczPO1zRxYpBut8zbZfQxQZdHTkseuuq1Etkv4rzz_PbeZxYFGhzhALtjJsYC2B9z8MUyo8XHPq5c0XBbr-SkKc5-sTlj5hdJ_kHHdNmBBpJZZE3CWlU=w600-h315-p-k" alt="Completed solar car being tested outdoors.">
+                </a>            <h3>9-10</h3>
+            <div class="image-container"> 
+                
+                <a href="https://lh3.googleusercontent.com/pw/AP1GczPAZii5yHbjuJlT-DhVtUEBFt8cKY_IU_XuFU71Ee9SzuDhc1svYRnSHvBSBA8keaRZlhYS-QFBpjjyzvlsFn3yjcst6LEoABha8YGxx1xisVU7BhM=w2400?source=screenshot.guru"> 
+                    <img src="https://lh3.googleusercontent.com/pw/AP1GczPAZii5yHbjuJlT-DhVtUEBFt8cKY_IU_XuFU71Ee9SzuDhc1svYRnSHvBSBA8keaRZlhYS-QFBpjjyzvlsFn3yjcst6LEoABha8YGxx1xisVU7BhM=w600-h315-p-k" alt="Aerodynamic testing of a solar-powered vehicle.">
+                </a>        </div>
+        
+    </section>
+
+
+    
+ 
+ <section id="faqs">
+     <div class="text-container">
+         <h2>Frequently Asked Questions</h2>
+         <div class="accordion">
+             <div class="accordion-item">
+                 <button id="accordion-button-1" aria-expanded="false">
+                     <span class="accordion-title">What type of solar panels should I use? -</span>
+                     <span class="icon" aria-hidden="true"></span>
+                 </button>
+                 <div class="accordion-content">
+                     <p>High-efficiency monocrystalline panels are recommended.</p>
+                 </div>
+             </div>
+             <div class="accordion-item">
+                 <button id="accordion-button-2" aria-expanded="false">
+                     <span class="accordion-title">How do I test the battery pack?</span>
+                     <span class="icon" aria-hidden="true"></span>
+                 </button>
+                 <div class="accordion-content">
+                     <p>Anything of electrical testing capacity: for example, a multimeter</p>
+                 </div>
+             </div>
+             <div class="accordion-item">
+                 <button id="accordion-button-3" aria-expanded="false">
+                     <span class="accordion-title">Can Solar Cars run indefinitely?</span>
+                     <span class="icon" aria-hidden="true"></span>
+                 </button>
+                 <div class="accordion-content">
+                     <p>Not yet! Right now they are limited by the efficiency of the solar array, as well as other physical and mechanical components</p>
+                 </div>
+             </div>
+             <div class="accordion-item">
+                 <button id="accordion-button-4" aria-expanded="false">
+                     <span class="accordion-title">Are Solar Cars dangerous?</span>
+                     <span class="icon" aria-hidden="true"></span>
+                 </button>
+                 <div class="accordion-content">
+                     <p>Only if the elements are abused</p>
+                 </div>
+             </div>
+             <div class="accordion-item">
+                 <button id="accordion-button-5" aria-expanded="false">
+                     <span class="accordion-title">How expensive are Solar Cars?</span>
+                     <span class="icon" aria-hidden="true"></span>
+                 </button>
+                 <div class="accordion-content">
+                     <p>Extremely expensive! We have to do many fundraising events to aquire enough money!</p>
+                 </div>
+             </div>
+         </div>
+     </div>
+ </section>
+ 
+ 
+ <section id="troubleshooting">
+     <div class="text-container" style="
+     width: 900px;
+     padding-top: 200px;
+     padding-bottom: 200px;
+ ">
+         <h2>Troubleshooting</h2>            
+             <h3>1. Electrical</h3>
+                 <li>Verify the charging system is supplying the correct voltage.</li>
+                 <li>Test and replace weak or damaged battery cells.</li>
+                 <li>Check all power connections for loose wires.</li>
+                 <li>Test the motor controller for proper signal output.</li>
+             <h3>4. Mechanical (Metals: Aluminum, Steel, or Composite)</h3>
+                 <li>Inspect for stress fractures or corrosion at joints.</li>
+                 <li>Check composite frames for delamination and repair with resin.</li>
+                 <li>Check for loose or corroded connectors and clean/replace them.</li>
+                 <li>Use a multimeter to test for voltage drops along the wiring.</li>
+         
+     </div>
+     <div class="image-container">
+        <a href="https://lh3.googleusercontent.com/pw/AP1GczPignXmCsGT40o8DaCPbqS6rbdAJ_BxM3k0iNGqhojJic8BXwRiloinYSqoNBqvYHnAzkrP70G0t6evPVj9_e5xM41W7lNyjBbmq96xvlq9hsOlydw=w2400?source=screenshot.guru"> <img src="https://lh3.googleusercontent.com/pw/AP1GczPignXmCsGT40o8DaCPbqS6rbdAJ_BxM3k0iNGqhojJic8BXwRiloinYSqoNBqvYHnAzkrP70G0t6evPVj9_e5xM41W7lNyjBbmq96xvlq9hsOlydw=w600-h315-p-k" /> </a>
+     </div>
+ </section>
+ 
+ <section id="contact">
+     <div class="text-container">
+         <h2>Contact</h2>
+         <p>Hannah Hale halehk@appstate.edu</p>
+         <p>Mal Holt holtme2@appstate.edu</p>
+         <p>Zach Shotwell shotwellzl@appstate.edu</p>
+         <p>Patrick Smith smithpd2@appstate.edu </p>
+     </div>
+ </section>
+ 
+ <footer>
+     <p>© 2025 Solar Car Project</p>
+ </footer>
+ 
+ <script>
+     const rightContainerClicky = document.getElementById('rightContainerClicky');
+     const generateButton = document.getElementById('generateButton');
+     let shapeIndex = 0;
+     const usedPositions = [];
+ 
+     const shapes = [
+         { label: 'Solar Panels', width: 300, height: 50, backgroundColor: 'black' },
+         { label: 'Battery Pack', width: 140, height: 50, backgroundColor: 'gray' },
+         { label: 'Electric Motor', width: 150, height: 50, backgroundColor: 'red', borderRadius: '50%' },
+         { label: 'Frame Materials', width: 300, height: 20, backgroundColor: 'gray' },
+         { label: 'Wiring and Connectors', width: 150, height: 50, backgroundColor: 'blue', borderRadius: '50%' }
+     ];
+ 
+     function getRandomPosition(width, height) {
+         let left, top, overlap;
+         do {
+             left = Math.random() * (rightContainerClicky.clientWidth - width);
+             top = Math.random() * (rightContainerClicky.clientHeight - height);
+             overlap = usedPositions.some(pos => 
+                 !(left + width < pos.left || left > pos.left + pos.width ||
+                   top + height < pos.top || top > pos.top + pos.height)
+             );
+         } while (overlap);
+ 
+         usedPositions.push({ left, top, width, height });
+         return { left, top };
+     }
+ 
+     function createShape(shapeData) {
+         const shape = document.createElement('div');
+         shape.classList.add('shape');
+         shape.style.width = shapeData.width + 'px';
+         shape.style.height = shapeData.height + 'px';
+         shape.style.backgroundColor = shapeData.backgroundColor;
+         if (shapeData.borderRadius) shape.style.borderRadius = shapeData.borderRadius;
+         shape.innerText = shapeData.label;
+ 
+         const position = getRandomPosition(shapeData.width, shapeData.height);
+         shape.style.left = position.left + 'px';
+         shape.style.top = position.top + 'px';
+ 
+         rightContainerClicky.appendChild(shape);
+         setTimeout(() => shape.classList.add('show'), 100);
+         shapeIndex++;
+     }
+ 
+     generateButton.addEventListener('click', () => {
+         if (shapeIndex >= shapes.length) {
+             rightContainerClicky.innerHTML = '';
+             shapeIndex = 0;
+             usedPositions.length = 0;
+         }
+         createShape(shapes[shapeIndex]);
+     });
+ 
+ 
+     const items = document.querySelectorAll(".accordion button");
+ 
+     function toggleAccordion() {
+     const itemToggle = this.getAttribute('aria-expanded');
+     
+     for (i = 0; i < items.length; i++) {
+         items[i].setAttribute('aria-expanded', 'false');
+     }
+     
+     if (itemToggle == 'false') {
+         this.setAttribute('aria-expanded', 'true');
+     }
+     }
+ 
+     items.forEach(item => item.addEventListener('click', toggleAccordion));
+ 
+     function moveCar() {
+             const car = document.querySelector('.car');
+             const maxX = window.innerWidth - 120;
+             const maxY = document.body.scrollHeight - 120;
+             
+             setInterval(() => {
+                 const x = Math.random() * maxX;
+                 const y = Math.random() * maxY;
+                 car.style.transform = `translate(${x}px, ${y}px)`;
+             }, 3000);
+         }
+         document.addEventListener("DOMContentLoaded", moveCar);
+ 
+ 
+ </script>
+ 
+ 
+ </body></html>
